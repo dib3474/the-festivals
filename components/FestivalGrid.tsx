@@ -1,0 +1,45 @@
+import FestivalCard from "@/components/FestivalCard";
+import Grid from "@/components/ui/Grid";
+
+interface Festival {
+  id: number;
+  title: string;
+  addr1: string;
+  addr2: string;
+  areaCode: number;
+  contentId: string;
+  endDate: string;
+  festivalType: string;
+  homePage: string;
+  overView: string;
+  posterInfo: string;
+  startDate: string;
+}
+
+interface FestivalGridProps {
+  festivals: Festival[]; // Festival 배열
+}
+
+export default function FestivalGrid({ festivals }: FestivalGridProps) {
+  return (
+    <Grid columns={{ default: 1, md: 2, lg: 3 }} gap="md">
+      {/*
+        Grid 컴포넌트 사용
+        columns: 모바일 1열, 태블릿 이상 2열, 큰 화면 이상 3열
+        gap: 중간 간격
+      */}
+      {festivals.map((festival) => (
+        // 배열을 map으로 순회하며 각 FestivalCard 생성
+        <FestivalCard
+          key={festival.id} // React에서 리스트 렌더링 시 필요
+          title={festival.title}
+          addr1={festival.addr1}
+          startDate={festival.startDate}
+          endDate={festival.endDate}
+          homePage={festival.homePage}
+          posterImage={festival.posterInfo}
+        />
+      ))}
+    </Grid>
+  );
+}
