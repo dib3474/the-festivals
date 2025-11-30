@@ -49,7 +49,7 @@ export default function Navigation() {
               통계
             </Link>
             <Link
-              href="/stats"
+              href="/about"
               className="inline-flex items-center px-1 pt-1 text-sm font-medium text-white hover:text-rose-100"
             >
               About
