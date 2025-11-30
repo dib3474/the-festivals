@@ -49,16 +49,10 @@ export default function Navigation() {
               통계
             </Link>
             <Link
-              href="/api-docs"
+              href="/stats"
               className="inline-flex items-center px-1 pt-1 text-sm font-medium text-white hover:text-rose-100"
             >
-              API 문서
-            </Link>
-            <Link
-              href="/health"
-              className="inline-flex items-center px-1 pt-1 text-sm font-medium text-white hover:text-rose-100"
-            >
-              시스템 상태
+              About
             </Link>
           </div>
           <div className="hidden lg:flex items-center gap-2">
