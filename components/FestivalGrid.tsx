@@ -1,20 +1,6 @@
 import FestivalCard from "@/components/FestivalCard";
 import Grid from "@/components/ui/Grid";
-
-interface Festival {
-  id: number;
-  title: string;
-  addr1: string;
-  addr2: string;
-  areaCode: number;
-  contentId: string;
-  endDate: string;
-  festivalType: string;
-  homePage: string;
-  overView: string;
-  posterInfo: string;
-  startDate: string;
-}
+import { Festival } from "@/types/festival";
 
 interface FestivalGridProps {
   festivals: Festival[]; // Festival 배열

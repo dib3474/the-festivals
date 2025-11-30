@@ -37,7 +37,7 @@ export default function Navigation() {
               홈
             </Link>
             <Link
-              href="/festivals"
+              href="/festival"
               className="inline-flex items-center px-1 pt-1 text-sm font-medium text-white hover:text-rose-100"
             >
               축제 목록
