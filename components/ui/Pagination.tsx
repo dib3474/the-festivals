@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import ChevronLeftIcon from "@/components/icon/ChevronLeftIcon";
 import ChevronRightIcon from "@/components/icon/ChevronRightIcon";
 import { cn } from "@/lib/utils/cn";
@@ -12,6 +15,7 @@ interface PaginationProps {
 const MAX_VISIBLE_PAGES = 5;
 
 export default function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps) {
+  const searchParams = useSearchParams();
   const pages = [];
   let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
   let endPage = Math.min(totalPages, startPage + MAX_VISIBLE_PAGES - 1);
@@ -25,7 +29,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
   }
 
   const createPageUrl = (page: number) => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
     params.set("page", page.toString());
     return `${baseUrl}?${params.toString()}`;
   };
