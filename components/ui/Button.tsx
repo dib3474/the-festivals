@@ -36,7 +36,8 @@ export default function Button({
   className,
   type = "button",
 }: ButtonProps) {
-  const baseClasses = "inline-block rounded transition-colors font-medium";
+  const baseClasses =
+    "inline-flex items-center justify-center rounded transition-colors font-medium";
 
   const classes = cn(
     baseClasses, // 기본 스타일

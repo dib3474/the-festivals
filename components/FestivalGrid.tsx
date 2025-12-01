@@ -18,11 +18,11 @@ export default function FestivalGrid({ festivals }: FestivalGridProps) {
         // 배열을 map으로 순회하며 각 FestivalCard 생성
         <FestivalCard
           key={festival.id} // React에서 리스트 렌더링 시 필요
+          id={festival.id}
           title={festival.title}
           addr1={festival.addr1}
           startDate={festival.startDate}
           endDate={festival.endDate}
-          homePage={festival.homePage}
           posterImage={festival.posterInfo}
         />
       ))}

@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/cms/**",
       },
+      {
+        protocol: "https",
+        hostname: "festa-pick-file.s3.ap-northeast-2.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
