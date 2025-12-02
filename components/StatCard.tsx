@@ -18,19 +18,14 @@ export default function StatCard({ title, value, icon }: StatCardProps) {
       className="flex flex-col items-center justify-center gap-2"
     >
       {/* Card 컴포넌트로 감싸기 */}
-      <Heading
-        level={2}
-        align="center"
-        marginBottom={false}
-        className="text-white font-bold"
-      >
+      <Heading level={2} align="center" marginBottom={false} className="text-white font-bold">
         {icon}
       </Heading>
       <Heading
         level={1}
         align="center"
         marginBottom={false}
-        className="text-white font-bold"
+        className="text-2xl sm:text-3xl text-white font-bold"
       >
         {/* 제목: h2 태그, 크기 lg, 하단 여백 없음 */}
         {value.toLocaleString()}

@@ -37,7 +37,7 @@ export default function Home() {
         upcomingCount={upcomingCount}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Heading level={3} size="xl" align="left" className="text-gray-900">
+        <Heading level={3} size="lg" align="left" className="text-gray-900">
           현재 진행 중인 축제
         </Heading>
         <FestivalGrid festivals={ongoingFestivals} />

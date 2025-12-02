@@ -15,7 +15,7 @@ export default function FestivalTitle({ festival }: FestivalTitleProps) {
         className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-1 transition-colors"
       >
         <ArrowLeftIcon size={20} className="mr-2" />
-        축제 목록으로 돌아가기
+        축제 목록에서 다양한 축제 둘러보기
       </Link>
       <Heading className="text-gray-900 mb-2">{festival.title}</Heading>
     </div>

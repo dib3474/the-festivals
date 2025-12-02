@@ -8,10 +8,10 @@ interface FestivalGridProps {
 
 export default function FestivalGrid({ festivals }: FestivalGridProps) {
   return (
-    <Grid columns={{ default: 1, md: 3, lg: 5 }} gap="md">
+    <Grid columns={{ default: 1, md: 2, lg: 4 }} gap="md">
       {/*
         Grid 컴포넌트 사용
-        columns: 모바일 1열, 태블릿 이상 2열, 큰 화면 이상 3열
+        columns: 모바일 1열, 태블릿 2열, 데스크탑 4열
         gap: 중간 간격
       */}
       {festivals.map((festival) => (

@@ -1,9 +1,7 @@
-import React from "react";
 import { notFound } from "next/navigation";
 import festivalsData from "@/data/festivals.json";
 import FestivalTitle from "@/components/festival/FestivalTitle";
 import FestivalInfo from "@/components/festival/FestivalInfo";
-import { Festival } from "@/types/festival";
 
 export async function generateStaticParams() {
   return festivalsData.map((festival) => ({
