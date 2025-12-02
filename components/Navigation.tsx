@@ -43,7 +43,7 @@ export default function Navigation() {
               축제 목록
             </Link>
             <Link
-              href="/stats"
+              href="/dashboard"
               className="inline-flex items-center px-1 pt-1 text-sm font-medium text-white hover:text-rose-100"
             >
               통계
