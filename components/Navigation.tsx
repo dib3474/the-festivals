@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FestivalIcon } from "@/components/icon/FestivalIcon";
 import Heading from "@/components/ui/Heading";
-import CalendarIcon from "./icon/CalendarIcon";
 
 export default function Navigation() {
   return (
@@ -54,11 +53,6 @@ export default function Navigation() {
             >
               About
             </Link>
-          </div>
-          <div className="hidden lg:flex items-center gap-2">
-            {/* 오른쪽: 오늘 날짜 */}
-            <CalendarIcon size={24} />
-            <p className="font-semibold">2025년 11월 11일</p>
           </div>
         </div>
       </div>
