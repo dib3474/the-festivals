@@ -1,45 +1,72 @@
-import Card from "@/components/ui/Card";
+"use client";
+
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
 import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
+import { RegionChartData } from "@/lib/utils/chart";
 
 interface RegionChartProps {
-  sortedRegions: { name: string; count: number; percentage: string }[];
+  data: RegionChartData[];
   selectedMonth: string;
 }
 
-export default function RegionChart({ sortedRegions, selectedMonth }: RegionChartProps) {
+export default function RegionChart({ data, selectedMonth }: RegionChartProps) {
   return (
-    <Card className="lg:col-span-3 flex flex-col gap-2 p-6">
-      <Heading level={3} size="lg" className="font-semibold text-gray-900" marginBottom={false}>
-        지역별 축제 현황
-      </Heading>
-      <Text color="muted" size="sm">
-        {selectedMonth === "all" ? "전체 기간" : `${selectedMonth}월`} 지역별 분포 (내림차순)
-      </Text>
-      <div className="flex items-end gap-4 h-64 overflow-x-auto pb-4 pt-4 mt-4 custom-scrollbar">
-        {sortedRegions.map((region) => (
-          <div
-            key={region.name}
-            className="flex flex-col items-center gap-2 min-w-[40px] h-full justify-end"
-          >
-            <div className="flex flex-col items-center justify-end w-8 h-full">
-              <span className="text-xs text-gray-600 font-medium mb-1">{region.count}</span>
-              <div
-                className="w-full bg-[#ee5b2b] rounded-t-lg transition-all"
-                style={{ height: region.percentage }}
-              ></div>
-            </div>
-            <span className="text-xs text-gray-600 font-medium whitespace-nowrap">
-              {region.name}
-            </span>
-          </div>
-        ))}
-        {sortedRegions.length === 0 && (
-          <div className="w-full text-center text-gray-500 py-4 self-center">
-            데이터가 없습니다.
-          </div>
-        )}
+    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm col-span-1">
+      <div className="mb-6">
+        <Heading level={3} size="lg" className="text-gray-900" marginBottom={false}>
+          지역별 축제 순위 (Top 10)
+        </Heading>
+        <p className="text-sm text-gray-500 mt-1">
+          {selectedMonth === "all" ? "전체 기간" : `${selectedMonth}월`} 기준 가장 축제가 많은
+          지역입니다.
+        </p>
       </div>
-    </Card>
+
+      <div className="h-[300px] w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            layout="vertical"
+            data={data}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E5E7EB" />
+            <XAxis type="number" hide />
+            <YAxis
+              dataKey="name"
+              type="category"
+              width={60}
+              tick={{ fill: "#4B5563", fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip
+              cursor={{ fill: "#F3F4F6" }}
+              contentStyle={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                border: "1px solid #E5E7EB",
+              }}
+            />
+            <Bar dataKey="count" radius={[0, 4, 4, 0]} barSize={20}>
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={index < 3 ? "#F59E0B" : "#9CA3AF"} // Top 3는 강조색
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
   );
 }

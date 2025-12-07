@@ -1,131 +1,66 @@
-import Card from "@/components/ui/Card";
+"use client";
+
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import Heading from "@/components/ui/Heading";
+import { TypeChartData } from "@/lib/utils/chart";
 
 interface TypeChartProps {
-  typeCounts: {
-    Music: number;
-    Food: number;
-    Nature: number;
-    Cultural: number;
-    Other: number;
-  };
+  data: TypeChartData[];
   totalCount: number;
 }
 
-export default function TypeChart({ typeCounts, totalCount }: TypeChartProps) {
-  const totalCategorized = Object.values(typeCounts).reduce((sum, count) => sum + count, 0);
-  const getPercent = (count: number) =>
-    totalCategorized === 0 ? 0 : Math.round((count / totalCategorized) * 100);
+const COLORS = ["#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#6366F1"];
 
-  const musicDash = totalCategorized === 0 ? 0 : (typeCounts.Music / totalCategorized) * 100;
-  const foodDash = totalCategorized === 0 ? 0 : (typeCounts.Food / totalCategorized) * 100;
-  const natureDash = totalCategorized === 0 ? 0 : (typeCounts.Nature / totalCategorized) * 100;
-  const culturalDash = totalCategorized === 0 ? 0 : (typeCounts.Cultural / totalCategorized) * 100;
-  const otherDash =
-    totalCategorized === 0
-      ? 0
-      : Math.max(0, 100 - musicDash - foodDash - natureDash - culturalDash);
-
+export default function TypeChart({ data, totalCount }: TypeChartProps) {
   return (
-    <Card className="lg:col-span-2 flex flex-col gap-2 p-6">
-      <Heading level={3} size="lg" className="font-semibold text-gray-900" marginBottom={false}>
-        유형별 축제 분포
-      </Heading>
-      <div className="flex items-center justify-center min-h-[180px] my-4">
-        <div className="relative w-40 h-40">
-          <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
-            <circle
-              className="stroke-current text-gray-200"
-              cx="18"
-              cy="18"
-              fill="none"
-              r="15.915"
-              strokeWidth="4"
-            ></circle>
-            {/* Music */}
-            <circle
-              className="stroke-current text-[#ee5b2b]"
-              cx="18"
-              cy="18"
-              fill="none"
-              r="15.915"
-              strokeDasharray={`${musicDash}, 100`}
-              strokeDashoffset="0"
-              strokeWidth="4"
-            ></circle>
-            {/* Food */}
-            <circle
-              className="stroke-current text-blue-500"
-              cx="18"
-              cy="18"
-              fill="none"
-              r="15.915"
-              strokeDasharray={`${foodDash}, 100`}
-              strokeDashoffset={`-${musicDash}`}
-              strokeWidth="4"
-            ></circle>
-            {/* Nature */}
-            <circle
-              className="stroke-current text-teal-500"
-              cx="18"
-              cy="18"
-              fill="none"
-              r="15.915"
-              strokeDasharray={`${natureDash}, 100`}
-              strokeDashoffset={`-${musicDash + foodDash}`}
-              strokeWidth="4"
-            ></circle>
-            {/* Cultural */}
-            <circle
-              className="stroke-current text-yellow-500"
-              cx="18"
-              cy="18"
-              fill="none"
-              r="15.915"
-              strokeDasharray={`${culturalDash}, 100`}
-              strokeDashoffset={`-${musicDash + foodDash + natureDash}`}
-              strokeWidth="4"
-            ></circle>
-            {/* Other */}
-            <circle
-              className="stroke-current text-gray-500"
-              cx="18"
-              cy="18"
-              fill="none"
-              r="15.915"
-              strokeDasharray={`${otherDash}, 100`}
-              strokeDashoffset={`-${musicDash + foodDash + natureDash + culturalDash}`}
-              strokeWidth="4"
-            ></circle>
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-2xl font-bold text-gray-900">{totalCount}</span>
-            <span className="text-xs text-gray-500">전체</span>
-          </div>
-        </div>
+    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm col-span-1">
+      <div className="mb-4">
+        <Heading level={3} size="lg" className="text-gray-900" marginBottom={false}>
+          축제 유형 분포
+        </Heading>
+        <p className="text-sm text-gray-500 mt-1">
+          총 {totalCount}개 축제를 키워드 기준으로 임의 분류한 통계입니다.
+        </p>
       </div>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-2 justify-items-center">
-        <div className={`flex items-center gap-2 ${typeCounts.Music === 0 ? "invisible" : ""}`}>
-          <div className="w-3 h-3 rounded-full bg-[#ee5b2b]"></div>
-          <span className="text-sm text-gray-700">음악 ({getPercent(typeCounts.Music)}%)</span>
-        </div>
-        <div className={`flex items-center gap-2 ${typeCounts.Food === 0 ? "invisible" : ""}`}>
-          <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-          <span className="text-sm text-gray-700">음식 ({getPercent(typeCounts.Food)}%)</span>
-        </div>
-        <div className={`flex items-center gap-2 ${typeCounts.Nature === 0 ? "invisible" : ""}`}>
-          <div className="w-3 h-3 rounded-full bg-teal-500"></div>
-          <span className="text-sm text-gray-700">자연 ({getPercent(typeCounts.Nature)}%)</span>
-        </div>
-        <div className={`flex items-center gap-2 ${typeCounts.Cultural === 0 ? "invisible" : ""}`}>
-          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <span className="text-sm text-gray-700">문화 ({getPercent(typeCounts.Cultural)}%)</span>
-        </div>
-        <div className={`flex items-center gap-2 ${typeCounts.Other === 0 ? "invisible" : ""}`}>
-          <div className="w-3 h-3 rounded-full bg-gray-400"></div>
-          <span className="text-sm text-gray-700">기타 ({getPercent(typeCounts.Other)}%)</span>
-        </div>
+
+      <div className="h-[300px] w-full flex items-center justify-center">
+        {data.length > 0 ? (
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={2}
+                minAngle={3}
+                dataKey="value"
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#fff",
+                  borderRadius: "8px",
+                  border: "1px solid #E5E7EB",
+                }}
+              />
+              <Legend
+                layout="vertical"
+                verticalAlign="middle"
+                align="right"
+                iconType="circle"
+                wrapperStyle={{ fontSize: "12px", color: "#4B5563" }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="text-gray-400 text-sm">데이터가 없습니다.</div>
+        )}
       </div>
-    </Card>
+    </div>
   );
 }

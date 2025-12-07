@@ -1,116 +1,68 @@
-import { useState } from "react";
-import Card from "@/components/ui/Card";
-import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
-import { getSmoothSvgPath } from "@/lib/utils/chart";
-import ChartTooltip from "@/components/dashboard/ChartTooltip";
+"use client";
 
-const MONTHS = [
-  "1월",
-  "2월",
-  "3월",
-  "4월",
-  "5월",
-  "6월",
-  "7월",
-  "8월",
-  "9월",
-  "10월",
-  "11월",
-  "12월",
-];
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
+import Heading from "@/components/ui/Heading";
+import { MonthlyChartData } from "@/lib/utils/chart";
 
 interface MonthlyChartProps {
-  monthlyCounts: number[];
+  data: MonthlyChartData[];
   selectedRegion: string;
 }
 
-export default function MonthlyChart({ monthlyCounts, selectedRegion }: MonthlyChartProps) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const maxMonthlyCount = Math.max(...monthlyCounts, 1);
-  const chartWidth = 478;
-  const xStep = chartWidth / 11;
-
-  const points: [number, number][] = monthlyCounts.map((count, index) => {
-    const x = index * xStep;
-    const y = 130 - (count / maxMonthlyCount) * 100;
-    return [x, y];
-  });
-
-  const linePath = getSmoothSvgPath(points);
-  const areaPath = `${linePath} L ${points[points.length - 1][0]} 150 L 0 150 Z`;
-
+export default function MonthlyChart({ data, selectedRegion }: MonthlyChartProps) {
   return (
-    <Card className="lg:col-span-3 flex flex-col gap-2 p-6">
-      <Heading level={3} size="lg" className="font-semibold text-gray-900" marginBottom={false}>
-        월별 축제 현황
-      </Heading>
-      <Text color="muted" size="sm">
-        {selectedRegion === "all" ? "전체 지역" : selectedRegion} 연간 추이
-      </Text>
-      <div className="h-64 mt-4">
-        <svg
-          fill="none"
-          height="100%"
-          preserveAspectRatio="none"
-          viewBox="0 0 478 150"
-          width="100%"
-          xmlns="http://www.w3.org/2000/svg"
-          className="overflow-visible"
-        >
-          <defs>
-            <linearGradient
-              gradientUnits="userSpaceOnUse"
-              id="chart-gradient"
-              x1="236"
-              x2="236"
-              y1="1"
-              y2="149"
-            >
-              <stop stopColor="#ee5b2b" stopOpacity="0.2"></stop>
-              <stop offset="1" stopColor="#ee5b2b" stopOpacity="0"></stop>
-            </linearGradient>
-          </defs>
-          <path d={areaPath} fill="url(#chart-gradient)"></path>
-          <path
-            d={linePath}
-            className="stroke-[#ee5b2b]"
-            strokeLinecap="round"
-            strokeWidth="2"
-          ></path>
-
-          {/* Interaction Layer */}
-          {points.map(([x, y], index) => (
-            <g key={index}>
-              {/* Hover Area */}
-              <rect
-                x={index === 0 ? 0 : x - xStep / 2}
-                y={0}
-                width={index === 0 || index === points.length - 1 ? xStep / 2 : xStep}
-                height={150}
-                fill="transparent"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className="cursor-pointer"
-              />
-
-              {/* Tooltip */}
-              {hoveredIndex === index && <ChartTooltip x={x} y={y} value={monthlyCounts[index]} />}
-            </g>
-          ))}
-        </svg>
+    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm col-span-1">
+      <div className="mb-6">
+        <Heading level={3} size="lg" className="text-gray-900" marginBottom={false}>
+          월별 축제 현황
+        </Heading>
+        <p className="text-sm text-gray-500 mt-1">
+          {selectedRegion === "all" ? "전국" : selectedRegion} 지역의 월별 축제 분포입니다.
+        </p>
       </div>
-      <div className="relative w-full h-5 -mt-4">
-        {MONTHS.map((month, index) => (
-          <p
-            key={month}
-            className="absolute top-0 text-gray-500 text-xs font-medium -translate-x-1/2 whitespace-nowrap"
-            style={{ left: `${(index / 11) * 100}%` }}
-          >
-            {month}
-          </p>
-        ))}
+
+      <div className="h-[300px] w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+            <XAxis
+              dataKey="name"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#6B7280", fontSize: 12 }}
+              angle={-45}
+              textAnchor="end"
+              dy={10}
+              height={60}
+              interval={0}
+            />
+            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#6B7280", fontSize: 12 }} />
+            <Tooltip
+              cursor={{ fill: "#F3F4F6" }}
+              contentStyle={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                border: "1px solid #E5E7EB",
+                boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+              }}
+            />
+            <Bar dataKey="count" radius={[4, 4, 0, 0]} maxBarSize={50}>
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.count > 0 ? "#3B82F6" : "#E5E7EB"} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
-    </Card>
+    </div>
   );
 }
