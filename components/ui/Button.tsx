@@ -24,6 +24,10 @@ const sizeStyles = {
   lg: "px-6 py-3 text-lg", // 큰 버튼
 };
 
+/**
+ * 다양한 스타일과 크기를 지원하는 버튼 컴포넌트입니다.
+ * href 속성이 있으면 Link 컴포넌트로, 없으면 button 태그로 렌더링됩니다.
+ */
 export default function Button({
   children,
   href,

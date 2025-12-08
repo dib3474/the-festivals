@@ -6,6 +6,10 @@ interface FestivalPosterProps {
   className?: string;
 }
 
+/**
+ * 축제 포스터 이미지를 보여주는 컴포넌트입니다.
+ * 이미지가 없을 경우 대체 텍스트를 표시합니다.
+ */
 export default function FestivalPoster({ posterUrl, title, className }: FestivalPosterProps) {
   return (
     <div

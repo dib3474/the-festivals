@@ -14,6 +14,10 @@ interface PaginationProps {
 
 const MAX_VISIBLE_PAGES = 5;
 
+/**
+ * 페이지 이동을 위한 페이지네이션 컴포넌트입니다.
+ * 이전/다음 버튼과 페이지 번호 목록을 표시합니다.
+ */
 export default function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps) {
   const searchParams = useSearchParams();
   const pages = [];
@@ -39,7 +43,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
   return (
     <div className="mt-12 flex justify-center">
       <nav className="flex items-center gap-2">
-        {/* Previous Button */}
+        {/* 이전 버튼 */}
         <Link
           href={currentPage > 1 ? createPageUrl(currentPage - 1) : "#"}
           className={cn(
@@ -54,7 +58,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
           <ChevronLeftIcon size={20} />
         </Link>
 
-        {/* Page Numbers */}
+        {/* 페이지 번호 */}
         {startPage > 1 && (
           <>
             <Link
@@ -91,7 +95,8 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
             </Link>
           </>
         )}
-        {/* Next Button */}
+
+        {/* 다음 버튼 */}
         <Link
           href={currentPage < totalPages ? createPageUrl(currentPage + 1) : "#"}
           className={cn(

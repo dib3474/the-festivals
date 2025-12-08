@@ -25,6 +25,10 @@ const paddingStyles = {
   lg: "p-8", // 큰 여백 (2rem)
 };
 
+/**
+ * 콘텐츠를 담는 컨테이너 역할을 하는 카드 컴포넌트입니다.
+ * 다양한 스타일(variant)과 여백(padding) 옵션을 제공합니다.
+ */
 export default function Card({
   children,
   className,

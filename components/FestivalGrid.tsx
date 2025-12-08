@@ -6,6 +6,10 @@ interface FestivalGridProps {
   festivals: Festival[]; // Festival 배열
 }
 
+/**
+ * 축제 카드들을 그리드 형태로 배치하여 보여주는 컴포넌트입니다.
+ * 반응형 그리드 레이아웃을 사용합니다.
+ */
 export default function FestivalGrid({ festivals }: FestivalGridProps) {
   return (
     <Grid columns={{ default: 1, md: 2, lg: 4 }} gap="md">
@@ -15,9 +19,8 @@ export default function FestivalGrid({ festivals }: FestivalGridProps) {
         gap: 중간 간격
       */}
       {festivals.map((festival) => (
-        // 배열을 map으로 순회하며 각 FestivalCard 생성
         <FestivalCard
-          key={festival.id} // React에서 리스트 렌더링 시 필요
+          key={festival.id}
           id={festival.id}
           title={festival.title}
           addr1={festival.addr1}

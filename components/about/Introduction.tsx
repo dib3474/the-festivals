@@ -1,6 +1,9 @@
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 
+/**
+ * 프로젝트 소개글을 보여주는 컴포넌트입니다.
+ */
 export default function Introduction() {
   return (
     <div className="flex flex-col gap-2">

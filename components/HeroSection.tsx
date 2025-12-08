@@ -8,6 +8,10 @@ interface HeroSectionProps {
   upcomingCount: number;
 }
 
+/**
+ * 메인 페이지 상단에 위치하는 히어로 섹션 컴포넌트입니다.
+ * 환영 메시지와 주요 통계 정보를 보여줍니다.
+ */
 export default function HeroSection({ totalCount, ongoingCount, upcomingCount }: HeroSectionProps) {
   const stats = [
     {
@@ -29,10 +33,6 @@ export default function HeroSection({ totalCount, ongoingCount, upcomingCount }:
 
   return (
     <div className="text-center mb-12 bg-red-400 pt-6 md:pt-12">
-      {/*
-        text-center: 모든 자식 요소 중앙 정렬
-        mb-12: 하단 여백 3rem
-      */}
       <Heading level={1} size="2xl" align="center" className="text-white text-3xl md:text-5xl px-4">
         축제 한마당에 오신 것을 환영합니다!
       </Heading>
@@ -45,7 +45,8 @@ export default function HeroSection({ totalCount, ongoingCount, upcomingCount }:
       >
         전국 방방곡곡에서 열리는 많은 축제를 만나보세요
       </Text>
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
+
+      <div className="mt-8 md:mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <StatGrid stats={stats} />
       </div>
     </div>

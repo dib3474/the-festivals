@@ -18,6 +18,9 @@ const MISSION_DATA = [
   },
 ];
 
+/**
+ * 미션과 가치 카드들을 그리드 형태로 배치하여 보여주는 컴포넌트입니다.
+ */
 export default function MissionGrid() {
   return (
     <Grid columns={{ default: 1, md: 2 }} gap="lg">

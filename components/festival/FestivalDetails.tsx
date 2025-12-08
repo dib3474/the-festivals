@@ -15,6 +15,9 @@ interface FestivalDetailsProps {
   homePage?: string;
 }
 
+/**
+ * 축제의 상세 정보(날짜, 위치, 홈페이지 링크)를 보여주는 컴포넌트입니다.
+ */
 export default function FestivalDetails({
   startDate,
   endDate,

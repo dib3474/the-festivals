@@ -1,3 +1,7 @@
+/**
+ * 페이지 하단에 위치하는 푸터 컴포넌트입니다.
+ * 저작권 정보 및 데이터 출처를 표시합니다.
+ */
 export default function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200 mt-auto">
@@ -19,8 +23,7 @@ export default function Footer() {
             text-gray-600: 텍스트 중간 회색
             text-sm: 작은 텍스트
           */}
-          © 2025 축제 한마당. 모든 축제 데이터는 공공데이터 포탈에서
-          제공받습니다.
+          © 2025 축제 한마당. 모든 축제 데이터는 공공데이터 포탈에서 제공받습니다.
         </p>
       </div>
     </footer>

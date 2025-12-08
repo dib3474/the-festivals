@@ -8,6 +8,9 @@ interface MissionCardProps {
   description: string;
 }
 
+/**
+ * 미션 및 가치 정보를 카드 형태로 보여주는 컴포넌트입니다.
+ */
 export default function MissionCard({ icon: Icon, title, description }: MissionCardProps) {
   return (
     <div className="flex flex-1 gap-4 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-stone-900 p-6 flex-col">

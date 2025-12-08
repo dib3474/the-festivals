@@ -10,25 +10,29 @@ import Button from "@/components/ui/Button";
 import Text from "@/components/ui/Text";
 import { areaCode } from "@/constants/areaCode";
 
+/**
+ * 축제 검색 및 필터링 기능을 제공하는 컴포넌트입니다.
+ * 키워드 검색, 지역 선택, 날짜 범위 선택 기능을 포함합니다.
+ */
 export default function FestivalSearchFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // State
+  // 상태 변수들
   const [keyword, setKeyword] = useState("");
   const [selectedAreaCode, setSelectedAreaCode] = useState<string>("");
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
 
-  // Dropdown visibility
+  // 드롭다운 표시 여부 상태
   const [isRegionOpen, setIsRegionOpen] = useState(false);
   const [isDateOpen, setIsDateOpen] = useState(false);
 
-  // Refs for click outside
+  // 외부 클릭 감지를 위한 Ref
   const regionRef = useRef<HTMLDivElement>(null);
   const dateRef = useRef<HTMLDivElement>(null);
 
-  // Initialize from URL
+  // URL 파라미터로부터 초기 상태 설정
   useEffect(() => {
     const k = searchParams.get("keyword") || "";
     const a = searchParams.get("areaCode") || "";
@@ -41,7 +45,7 @@ export default function FestivalSearchFilters() {
     setEndDate(e);
   }, [searchParams]);
 
-  // Close dropdowns on click outside
+  // 외부 클릭 시 드롭다운 닫기
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (regionRef.current && !regionRef.current.contains(event.target as Node)) {
@@ -61,7 +65,7 @@ export default function FestivalSearchFilters() {
     if (selectedAreaCode) params.set("areaCode", selectedAreaCode);
     if (startDate) params.set("startDate", startDate);
     if (endDate) params.set("endDate", endDate);
-    params.set("page", "1"); // Reset to page 1
+    params.set("page", "1"); // 검색 시 1페이지로 초기화
 
     router.push(`/festival?${params.toString()}`);
   };
@@ -81,7 +85,7 @@ export default function FestivalSearchFilters() {
 
   return (
     <div className="flex flex-col gap-6 mb-8">
-      {/* Search Bar */}
+      {/* 검색 바 */}
       <div className="mx-auto w-full max-w-2xl">
         <div className="relative flex w-full items-center">
           <input
@@ -102,9 +106,9 @@ export default function FestivalSearchFilters() {
         </div>
       </div>
 
-      {/* Filter Buttons */}
+      {/* 필터 버튼 */}
       <div className="flex flex-wrap items-center justify-center gap-2 relative z-10">
-        {/* Region Filter */}
+        {/* 지역 필터 */}
         <div className="relative" ref={regionRef}>
           <Button
             variant="ghost"
@@ -145,7 +149,7 @@ export default function FestivalSearchFilters() {
           )}
         </div>
 
-        {/* Date Range Filter */}
+        {/* 기간 필터 */}
         <div className="relative" ref={dateRef}>
           <Button
             variant="ghost"
@@ -208,7 +212,7 @@ export default function FestivalSearchFilters() {
           )}
         </div>
 
-        {/* Reset Button */}
+        {/* 초기화 버튼 */}
         <Button
           variant="ghost"
           onClick={handleReset}

@@ -6,6 +6,9 @@ interface FestivalListGridProps {
   festivals: Festival[];
 }
 
+/**
+ * 축제 목록 페이지에서 축제 카드들을 그리드 형태로 보여주는 컴포넌트입니다.
+ */
 export default function FestivalListGrid({ festivals }: FestivalListGridProps) {
   return (
     <Grid columns={{ default: 1, md: 3, lg: 5 }} gap="md">

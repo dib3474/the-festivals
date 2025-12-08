@@ -6,6 +6,9 @@ interface FestivalOverviewProps {
   overview: string;
 }
 
+/**
+ * 축제의 상세 설명(개요)을 보여주는 컴포넌트입니다.
+ */
 export default function FestivalOverview({ overview }: FestivalOverviewProps) {
   return (
     <Card padding="md" className="rounded-2xl border border-gray-100">

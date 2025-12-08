@@ -2,6 +2,10 @@ import Image from "next/image";
 import Heading from "@/components/ui/Heading";
 import { BASE_PATH } from "@/lib/utils/basePath";
 
+/**
+ * 소개 페이지의 상단 히어로 섹션 컴포넌트입니다.
+ * 배경 이미지와 함께 주요 슬로건을 표시합니다.
+ */
 export default function HeroSection() {
   return (
     <div className="max-w-[960px]">

@@ -8,9 +8,12 @@ interface Stats {
 }
 
 interface StatGridProps {
-  stats: Stats[]; // Stats 배열
+  stats: Stats[];
 }
 
+/**
+ * 여러 통계 카드를 그리드 형태로 배치하여 보여주는 컴포넌트입니다.
+ */
 export default function StatGrid({ stats }: StatGridProps) {
   return (
     <Grid columns={{ default: 1, md: 2, lg: 3 }} gap="md">
@@ -20,13 +23,7 @@ export default function StatGrid({ stats }: StatGridProps) {
         gap: 중간 간격
       */}
       {stats.map((stat, index) => (
-        // 배열을 map으로 순회하며 각 FestivalCard 생성
-        <StatCard
-          key={index}
-          title={stat.title}
-          value={stat.value}
-          icon={stat.icon}
-        />
+        <StatCard key={index} title={stat.title} value={stat.value} icon={stat.icon} />
       ))}
     </Grid>
   );

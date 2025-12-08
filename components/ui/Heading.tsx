@@ -28,6 +28,10 @@ const alignStyles = {
   right: "text-right",
 };
 
+/**
+ * 제목(Heading)을 표시하는 컴포넌트입니다.
+ * 레벨(h1~h6)과 시각적 크기(size)를 독립적으로 설정할 수 있습니다.
+ */
 export default function Heading({
   children,
   level = 1,

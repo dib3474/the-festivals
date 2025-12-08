@@ -47,6 +47,10 @@ const gridColLgStyles: Record<number, string> = {
   6: "lg:grid-cols-6",
 };
 
+/**
+ * 반응형 그리드 레이아웃을 생성하는 컴포넌트입니다.
+ * 화면 크기에 따라 열 수를 다르게 설정할 수 있습니다.
+ */
 export default function Grid({
   children,
   columns = { default: 1, md: 2 },

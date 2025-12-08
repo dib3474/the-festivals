@@ -14,6 +14,9 @@ interface FestivalCardProps {
   posterImage: string; // 포스터 이미지
 }
 
+/**
+ * 개별 축제 정보를 카드 형태로 보여주는 컴포넌트입니다.
+ */
 export default function FestivalCard({ id, title, addr1, posterImage }: FestivalCardProps) {
   const CardContent = (
     <Card className="group relative flex flex-col overflow-hidden rounded-2xl shadow-lg transition-shadow duration-300 hover:shadow-2xl h-full">

@@ -33,6 +33,10 @@ const alignStyles = {
   right: "text-right",
 };
 
+/**
+ * 본문 텍스트를 표시하는 컴포넌트입니다.
+ * 크기, 색상, 정렬 등을 설정할 수 있습니다.
+ */
 export default function Text({
   children,
   size = "md",

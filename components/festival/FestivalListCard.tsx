@@ -15,6 +15,9 @@ interface FestivalListCardProps {
   posterImage: string;
 }
 
+/**
+ * 날짜를 기준으로 축제의 상태(예정, 진행 중, 종료)를 반환합니다.
+ */
 const getStatus = (startDate: string, endDate: string) => {
   const today = new Date();
   const start = new Date(startDate);
@@ -35,6 +38,10 @@ const getStatus = (startDate: string, endDate: string) => {
   }
 };
 
+/**
+ * 축제 목록 페이지에서 사용되는 개별 축제 카드 컴포넌트입니다.
+ * 축제 상태 뱃지와 간략한 정보를 표시합니다.
+ */
 export default function FestivalListCard({
   id,
   title,

@@ -4,6 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { FestivalIcon } from "@/components/icon/FestivalIcon";
 
+/**
+ * 상단 네비게이션 바 컴포넌트입니다.
+ * 로고, 메뉴 링크, 모바일 메뉴를 포함합니다.
+ */
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -13,7 +17,6 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 최대 너비 1280px, 가로 중앙 정렬, 좌우 여백 */}
         <div className="flex justify-between h-20">
-          {/* 높이 4rem, 아이템 양 끝 정렬 */}
           {/* 왼쪽: 로고 */}
           <Link
             href="/"

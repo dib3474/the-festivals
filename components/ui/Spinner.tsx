@@ -5,6 +5,9 @@ interface SpinnerProps {
   className?: string;
 }
 
+/**
+ * 로딩 상태를 표시하는 스피너 컴포넌트입니다.
+ */
 export default function Spinner({ size = "md", className }: SpinnerProps) {
   const sizeClasses = {
     sm: "h-4 w-4 border-2",
