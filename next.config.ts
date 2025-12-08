@@ -1,14 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "export",
   images: {
+    unoptimized: true,
     remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "tong.visitkorea.or.kr",
-        port: "",
-        pathname: "/cms/**",
-      },
       {
         protocol: "https",
         hostname: "tong.visitkorea.or.kr",
