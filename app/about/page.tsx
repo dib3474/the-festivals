@@ -1,6 +1,12 @@
 import HeroSection from "@/components/about/HeroSection";
 import Introduction from "@/components/about/Introduction";
 import MissionGrid from "@/components/about/MissionGrid";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "소개",
+  description: "The Festivals 프로젝트를 소개합니다.",
+};
 
 export default function About() {
   return (

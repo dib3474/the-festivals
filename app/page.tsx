@@ -3,6 +3,11 @@ import FestivalGrid from "@/components/FestivalGrid";
 import Heading from "@/components/ui/Heading";
 import festivalsData from "@/data/festivals.json";
 import { Festival } from "@/types/festival";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  description: "오늘 진행 중인 축제와 인기 축제를 확인해보세요.",
+};
 
 export default function Home() {
   const today = new Date();

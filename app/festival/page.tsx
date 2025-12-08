@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Festival } from "@/types/festival";
 import FestivalListGrid from "@/components/festival/FestivalListGrid";
 import FestivalSearchFilters from "@/components/festival/FestivalSearchFilters";
+import FestivalLoading from "@/components/festival/FestivalLoading";
 import Pagination from "@/components/ui/Pagination";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
@@ -22,39 +23,33 @@ function FestivalListContent() {
 
   let filteredFestivals = festivalsData as Festival[];
 
-  // Filter by keyword
+  // 키워드로 필터링
   if (keyword) {
     filteredFestivals = filteredFestivals.filter((festival) => festival.title.includes(keyword));
   }
 
-  // Filter by areaCode
+  // 지역 코드로 필터링
   if (areaCode) {
     filteredFestivals = filteredFestivals.filter(
       (festival) => festival.areaCode === Number(areaCode)
     );
   }
 
-  // Filter by date range
+  // 날짜 범위로 필터링
   if (startDate || endDate) {
     filteredFestivals = filteredFestivals.filter((festival) => {
       const festivalStart = festival.startDate;
       const festivalEnd = festival.endDate;
 
-      // If both dates are selected, check for overlap
       if (startDate && endDate) {
         return festivalStart <= endDate && festivalEnd >= startDate;
       }
-
-      // If only startDate is selected, show festivals ending after or on startDate
       if (startDate) {
         return festivalEnd >= startDate;
       }
-
-      // If only endDate is selected, show festivals starting before or on endDate
       if (endDate) {
         return festivalStart <= endDate;
       }
-
       return true;
     });
   }
@@ -68,7 +63,7 @@ function FestivalListContent() {
 
   return (
     <div className="w-full max-w-7xl">
-      {/* Hero Section */}
+      {/* 히어로 섹션 */}
       <div className="flex flex-col gap-6 mb-8">
         <div className="text-center">
           <Heading
@@ -84,11 +79,11 @@ function FestivalListContent() {
           </Text>
         </div>
 
-        {/* Search & Filters (Client Component) */}
+        {/* 검색 및 필터 (클라이언트 컴포넌트) */}
         <FestivalSearchFilters />
       </div>
 
-      {/* Festival Grid or No Results */}
+      {/* 축제 그리드 또는 결과 없음 */}
       {currentFestivals.length > 0 ? (
         <>
           <FestivalListGrid festivals={currentFestivals} />
@@ -112,7 +107,7 @@ function FestivalListContent() {
 export default function FestivalListPage() {
   return (
     <main className="min-h-screen bg-gray-50 flex flex-1 justify-center py-8 px-4 sm:px-6 lg:px-8">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<FestivalLoading />}>
         <FestivalListContent />
       </Suspense>
     </main>
