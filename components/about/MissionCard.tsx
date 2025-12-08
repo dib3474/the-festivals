@@ -13,8 +13,8 @@ interface MissionCardProps {
  */
 export default function MissionCard({ icon: Icon, title, description }: MissionCardProps) {
   return (
-    <div className="flex flex-1 gap-4 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-stone-900 p-6 flex-col">
-      <Icon size={32} className="text-primary" />
+    <div className="flex flex-1 gap-4 rounded-xl bg-stone-900 p-6 flex-col">
+      <Icon size={32} className="text-primary stroke-white" />
       <div className="flex flex-col gap-1">
         <Heading
           level={3}
