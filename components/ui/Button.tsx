@@ -1,15 +1,12 @@
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils/cn";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  href?: string; // 링크 주소 (있으면 Link로 변환)
-  onClick?: () => void; // 클릭 이벤트
+  href?: string;
   variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
-  className?: string;
-  type?: "button" | "submit" | "reset";
 }
 
 // variant별 스타일
@@ -30,11 +27,11 @@ const sizeStyles = {
 export default function Button({
   children,
   href,
-  onClick,
   variant = "primary",
   size = "md",
   className,
   type = "button",
+  ...props
 }: ButtonProps) {
   const baseClasses =
     "inline-flex items-center justify-center rounded transition-colors font-medium";
@@ -57,7 +54,7 @@ export default function Button({
 
   // href가 없으면 일반 button 태그로 렌더링
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button type={type} className={classes} {...props}>
       {children}
     </button>
   );

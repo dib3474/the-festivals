@@ -49,6 +49,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
               : "text-gray-300 cursor-not-allowed pointer-events-none"
           )}
           aria-disabled={currentPage <= 1}
+          aria-label="이전 페이지"
         >
           <ChevronLeftIcon size={20} />
         </Link>
@@ -90,7 +91,6 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
             </Link>
           </>
         )}
-
         {/* Next Button */}
         <Link
           href={currentPage < totalPages ? createPageUrl(currentPage + 1) : "#"}
@@ -101,6 +101,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
               : "text-gray-300 cursor-not-allowed pointer-events-none"
           )}
           aria-disabled={currentPage >= totalPages}
+          aria-label="다음 페이지"
         >
           <ChevronRightIcon size={20} />
         </Link>

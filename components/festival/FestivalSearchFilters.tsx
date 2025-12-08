@@ -95,6 +95,7 @@ export default function FestivalSearchFilters() {
             variant="primary"
             onClick={handleSearch}
             className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full text-white transition-colors"
+            aria-label="검색"
           >
             <SearchIcon size={20} />
           </Button>
