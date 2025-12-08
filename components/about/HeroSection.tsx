@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Heading from "@/components/ui/Heading";
+import { BASE_PATH } from "@/lib/utils/basePath";
 
 export default function HeroSection() {
   return (
     <div className="max-w-[960px]">
       <div className="relative flex min-h-[480px] flex-col gap-6 items-center justify-center p-4 rounded-xl overflow-hidden">
         <Image
-          src="/about_img.png"
+          src={`${BASE_PATH}/about_img.png`}
           alt="Festival Scenery"
           fill
           className="object-cover z-0"
