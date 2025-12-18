@@ -1,90 +1,74 @@
-# 🎪 축제 한마당 (The Festivals)
+# 축제 한마당 / The Festivals - 전국 축제 대시보드
 
-전국의 다양한 축제 정보를 한눈에 확인하고 검색할 수 있는 웹 애플리케이션입니다.
-공공데이터포털의 축제 데이터를 활용하여 사용자에게 유용한 축제 정보를 제공합니다.
+## 1. 프로젝트 개요
 
-## 🚀 배포 링크
+이 프로젝트는 Next.js를 활용하여 정적 웹사이트를 구축하고, 공공 데이터를 시각화하는 인터랙티브 대시보드를 만들어보는 연습 과정입니다. 단순히 대시보드를 만드는 결과를 넘어 Next.js의 App Router 구조를 이해하고 컴포넌트 기반의 웹 개발 능력을 향상시키는 과정에 중점을 두었습니다.
 
-[축제 한마당 바로가기](https://dib3474.github.io/the-festivals/)
+- 프로젝트명: 축제 한마당 / The Festivals
+- 목표: Next.js 16을 사용한 정적 홈페이지 작성 및 데이터 시각화 구현 능력 향상.
+- 주제 및 데이터: 전국 축제 정보를 주제로 선정했습니다. 데이터는 [공공데이터포털](https://www.data.go.kr/)의 '한국관광공사 국문 관광정보 서비스'를 활용하여 JSON 형태로 가공해 사용했습니다.
+- 배포 링크: [https://dib3474.github.io/the-festivals/](https://dib3474.github.io/the-festivals/)
 
-## ✨ 주요 기능
+## 2. 기술 스택
 
-- **🏠 홈**
+프로젝트 구현에 사용한 핵심 도구들입니다.
 
-  - 전체, 진행 중, 예정된 축제 수를 한눈에 파악할 수 있는 통계 카드 제공
-  - 축제 현황을 시각적으로 보여주는 히어로 섹션
+- 프레임워크: Next.js 16
+- 언어: React 19, TypeScript
+- 스타일링: Tailwind CSS 4
+- 데이터 시각화: Recharts
 
-- **📋 축제 목록**
+## 3. 주요 기능 구현 상세
 
-  - 카드 형태의 그리드 레이아웃으로 축제 포스터와 기본 정보 제공
-  - 페이지네이션을 통한 효율적인 데이터 탐색
-  - 반응형 디자인으로 모바일, 태블릿, 데스크탑 모두 최적화
+### 3.1. 페이지 구성 및 라우팅
 
-- **📊 대시보드**
+총 5개의 핵심 페이지로 구성했습니다.
 
-  - 지역별, 월별 축제 분포를 차트로 시각화 (Recharts 활용)
-  - 데이터 기반의 축제 트렌드 분석
+- Home (`/`): 전체적인 요약 정보와 진행 중인 축제.
+- About (`/about`): 프로젝트 및 서비스 소개.
+- Dashboard (`/dashboard`): 데이터 시각화 및 통계.
+- Festival List (`/festival`): 축제 목록 및 검색.
+- Festival Detail (`/festival/[slug]`): 축제 상세 정보.
 
-- **ℹ️ 축제 상세 정보**
-  - 각 축제의 상세 일정, 장소, 개요, 홈페이지 링크 등 제공
+공통 레이아웃(`app/layout.tsx`)을 통해 헤더(Navigation)와 푸터(Footer)를 전역으로 관리하며, 상세 페이지는 동적 라우팅(`[slug]`)을 사용하여 하나의 컴포넌트로 다양한 축제 정보를 표시하도록 구현했습니다.
 
-## 💻 실행 방법 (Getting Started)
+### 3.2. 데이터 활용 및 대시보드
 
-### 1. 프로젝트 클론
+`data/festivals.json`에 저장된 축제 데이터를 기반으로 인사이트를 제공합니다.
 
-```bash
-git clone https://github.com/dib3474/the-festivals.git
-cd the-festivals
-```
+- 시각화: Recharts 라이브러리를 활용하여 월별 축제 수, 지역별 분포, 축제 유형 비율 등을 차트로 시각화했습니다.
+- 인터랙션: 대시보드 상단에 필터(월별, 지역별)로 사용자가 선택한 조건에 따라 차트와 통계 수치가 즉시 변경되도록 구현했습니다.
 
-### 2. 의존성 설치
+### 3.3. 검색 기능 (필수 기능)
 
-```bash
-npm install
-```
+사용자가 원하는 축제를 쉽게 찾을 수 있도록 검색 기능을 구현했습니다.
 
-### 3. 개발 서버 실행
+- 구현 방식: `use client`와 `useSearchParams`를 활용하여 URL 쿼리 스트링 기반의 검색을 구현했습니다. 이를 통해 검색 결과 페이지의 공유가 가능하며 뒤로가기 시에도 검색 결과가 유지되어 사용자 경험을 향상시켰습니다.
+- 연동: 키워드, 날짜, 지역 필터를 통해 리스트를 실시간으로 필터링하며, 카드를 클릭하면 해당 축제의 상세 페이지로 이동합니다.
 
-```bash
-npm run dev
-```
+## 4. 개발 과정의 개선 사항 및 완성도
 
-브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인합니다.
+사용자 경험(UX)과 코드의 품질을 높이기 위해 다음 사항들을 신경 썼습니다.
 
-### 4. 빌드 및 배포
+- 디자인 완성도: Tailwind CSS를 활용하여 깔끔하고 일관된 UI를 구성했습니다. 모바일에서도 깨짐 없이 볼 수 있도록 반응형으로 제작했습니다.
+- 상태 처리:
+  - 데이터를 불러오는 동안 사용자에게 피드백을 주기 위해 `Suspense`와 `loading.tsx`를 활용해 로딩 스피너를 구현했습니다.
+  - 예기치 않은 오류 발생 시 `error.tsx`를 통해 사용자 친화적인 에러 메시지를 보여줍니다.
+- SEO 최적화: `layout.tsx` 및 각 페이지에 `metadata` 객체를 설정하여, 페이지별로 적절한 제목과 설명이 노출되도록 했습니다.
 
-```bash
-npm run build
-```
+## 5. 프로젝트 실행 방법
 
-## 🛠 기술 스택 (Tech Stack)
+로컬 환경에서 프로젝트를 실행해보실 수 있습니다.
 
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
-- **Visualization**: [Recharts](https://recharts.org/)
-- **Deployment**: GitHub Pages (Static Export)
-
-## 📂 프로젝트 구조
-
-```
-the-festivals/
-├── app/                # Next.js App Router 페이지
-│   ├── about/          # 소개 페이지
-│   ├── dashboard/      # 통계 대시보드
-│   ├── festival/       # 축제 목록 및 상세 페이지
-│   └── page.tsx        # 메인 페이지
-├── components/         # 재사용 가능한 컴포넌트
-│   ├── ui/             # 버튼, 카드 등 기본 UI 컴포넌트
-│   ├── icon/           # 아이콘 컴포넌트
-│   └── ...             # 기능별 컴포넌트 (FestivalCard, HeroSection 등)
-├── constants/          # 상수 데이터 (지역코드, 카테고리 등)
-├── lib/                # 유틸리티 함수
-├── public/             # 정적 파일 (이미지 등)
-├── types/              # TypeScript 타입 정의
-└── ...
-```
-
-## 📝 데이터 출처
-
-이 프로젝트는 [공공데이터포털](https://www.data.go.kr/)의 한국관광공사\_국문 관광정보 서비스 데이터를 활용하였습니다.
+1.  데이터 확인: 프로젝트 루트의 `data/festivals.json` 파일이 데이터 원본입니다.
+2.  프로젝트 클론 및 설치:
+    ```bash
+    git clone https://github.com/dib3474/the-festivals.git
+    cd the-festivals
+    npm install
+    ```
+3.  **실행**:
+    ```bash
+    npm run dev
+    ```
+4.  브라우저에서 [http://localhost:3000](http://localhost:3000)으로 접속하여 확인합니다.
